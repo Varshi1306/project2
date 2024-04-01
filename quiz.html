@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Online Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .quiz-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+    }
+    .options li {
+      margin-bottom: 5px;
+    }
+    .btn {
+      background-color: #3498db;
+      color: #fff;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .score-container {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div class="question">Question 1: What is the capital of France?</div>
+    <ul class="options">
+      <li><input type="radio" name="q1" value="a"> a) Paris</li>
+      <li><input type="radio" name="q1" value="b"> b) Madrid</li>
+      <li><input type="radio" name="q1" value="c"> c) Rome</li>
+    </ul>
+    <div class="question">Question 2: Which planet is known as the Red Planet?</div>
+    <ul class="options">
+      <li><input type="radio" name="q2" value="a"> a) Venus</li>
+      <li><input type="radio" name="q2" value="b"> b) Mars</li>
+      <li><input type="radio" name="q2" value="c"> c) Jupiter</li>
+    </ul>
+    <div class="question">Question 3: Which city of India is known as the pink city?</div>
+    <ul class="options">
+      <li><input type="radio" name="q3" value="a"> a) Jaipur</li>
+      <li><input type="radio" name="q3" value="b"> b) Lucknow</li>
+      <li><input type="radio" name="q3" value="c"> c) Delhi</li>
+    </ul>
+    <button class="btn" onclick="calculateScore()">Submit</button>
+  </div>
+
+  <div class="score-container">
+    <h2>Your Score:</h2>
+    <p id="score"></p>
+  </div>
+
+  <script>
+    function calculateScore() {
+      const totalQuestions = 3;
+      let correctAnswers = 0;
+
+      if (document.querySelector('input[name="q1"]:checked')?.value === 'a') {
+        correctAnswers++;
+      }
+
+      if (document.querySelector('input[name="q2"]:checked')?.value === 'b') {
+        correctAnswers++;
+      }
+      if (document.querySelector('input[name="q3"]:checked')?.value === 'a') {
+        correctAnswers++;
+      }
+      const scorePercentage = (correctAnswers / totalQuestions) * 100;
+      const scoreElement = document.getElementById('score');
+      scoreElement.textContent = `${correctAnswers} out of ${totalQuestions} (${scorePercentage.toFixed(3)}%)`;
+      scoreElement.style.color = scorePercentage >= 50 ? 'green' : 'red';
+
+      // Show the score container
+      const scoreContainer = document.querySelector('.score-container');
+      scoreContainer.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
